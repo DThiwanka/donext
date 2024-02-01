@@ -1,19 +1,18 @@
-// const router = require('express').Router();
-// router.use(express.json());
-
 const express = require('express');
 const router = express.Router();
 router.use(express.json());
 
+// Import the Employee model
 let Employee = require('../models/Employee');
 
+// Route to get all employees
 router.route('/employees').get((req, res) => {
     Employee.find()
         .then(employees => res.json(employees))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-
+// Route to add a new employee
 router.route('/employees').post((req, res) => {
     const name = req.body.name;
     const email = req.body.email;
@@ -42,16 +41,18 @@ router.route('/employees').post((req, res) => {
     newEmployee.save()
         .then(() => res.json('Employee Added Successfully'))
         .catch(err => res.status(400).json('Error: ' + err));
-    
+
 });
 
+// Route to get a specific employee by ID
 router.route('/employees/:id').get((req, res) => {
     Employee.findById(req.params.id)
         .then(employee => res.json(employee))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/employees/:id').put((req, res) => { 
+// Route to update a specific employee by ID
+router.route('/employees/:id').put((req, res) => {
     Employee.findById(req.params.id)
         .then(employee => {
             employee.name = req.body.name;
@@ -72,6 +73,7 @@ router.route('/employees/:id').put((req, res) => {
         .catch(err => res.status(400).json("Error: " + err));
 });
 
+// Route to update a specific employee by ID
 router.route('/employees/:id').patch((req, res) => {
     Employee.findById(req.params.id)
         .then(employee => {
@@ -87,12 +89,13 @@ router.route('/employees/:id').patch((req, res) => {
             employee.createdAt = req.body.createdAt;
 
             employee.save()
-                .then(() => res.json('Employee Updated Successfully',employee))
+                .then(() => res.json('Employee Updated Successfully', employee))
                 .catch(err => res.status(400).json('Error: ' + err));
         })
         .catch(err => res.status(400).json("Error: " + err));
 });
 
+// Route to delete a specific employee by ID
 router.route('/employees/:id').delete((req, res) => {
     Employee.findByIdAndDelete(req.params.id)
         .then(() => res.json('Employee Deleted Successfully'))

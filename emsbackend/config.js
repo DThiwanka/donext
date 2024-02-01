@@ -4,6 +4,7 @@ const path = require('path');
 
 console.log("Config loaded:");
 
+// Load the .env file
 dotenv.config({
     path: path.resolve(__dirname, `${process.env.NODE_ENV}.env`)
 });

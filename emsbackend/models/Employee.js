@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+// Define the Employee schema
 const EmployeeSchema = new Schema({
 
     name: {
@@ -50,25 +51,25 @@ const EmployeeSchema = new Schema({
         required: true
     },
 
-    address:[{
+    address: [{
         street: {
             type: String,
             required: true
         },
-    
+
         city: {
             type: String,
             required: true
         },
-    
+
         zipCode: {
             type: String,
             required: true
         }
     }],
-    
+
     skills: { type: Array, "default": [] },
-    
+
     createdAt: {
         type: Date,
         default: Date.now
@@ -77,6 +78,7 @@ const EmployeeSchema = new Schema({
 
 });
 
+// Create the Employee model based on the schema
 const Employee = mongoose.model("Employee", EmployeeSchema);
 
 module.exports = Employee;
