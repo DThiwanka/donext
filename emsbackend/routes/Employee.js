@@ -1,4 +1,9 @@
-const router = require('express').Router();
+// const router = require('express').Router();
+// router.use(express.json());
+
+const express = require('express');
+const router = express.Router();
+router.use(express.json());
 
 let Employee = require('../models/Employee');
 
@@ -37,6 +42,7 @@ router.route('/employees').post((req, res) => {
     newEmployee.save()
         .then(() => res.json('Employee Added Successfully'))
         .catch(err => res.status(400).json('Error: ' + err));
+    
 });
 
 router.route('/employees/:id').get((req, res) => {

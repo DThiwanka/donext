@@ -1,9 +1,9 @@
-const config = require("./config");
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const config = require("./config");
 let mode = '';
 
 const app = express();
@@ -34,7 +34,7 @@ app.use(
     require('./routes/Employee')
 );
 
-const port = config.PORT || process.env.PORT || 3000; // Use a default port if not provided
+const port = config.PORT || process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server is Running on PORT ${config.PORT} 😎💤`);
     console.log(`Server Runnning env is ${config.NODE_ENV} 👍`);
